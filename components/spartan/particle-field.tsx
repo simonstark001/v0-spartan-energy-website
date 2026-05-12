@@ -19,7 +19,7 @@ export function ParticleField() {
   const animationRef = useRef<number>()
   const mouseRef = useRef({ x: 0, y: 0 })
 
-  const colors = ["#BC171F", "#F5A623", "#8892b0", "#e6f1ff"]
+  const colors = ["#F5A623", "#F5A623", "#D4920F", "#E8B84A"]
 
   const createParticle = useCallback((width: number, height: number): Particle => {
     return {

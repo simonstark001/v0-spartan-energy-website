@@ -39,25 +39,25 @@ export function MagneticButton({
 
   const variantStyles = {
     primary:
-      "bg-[#BC171F] text-white hover:bg-[#a3141a] shadow-lg shadow-[#BC171F]/20",
+      "bg-[#BC171F] text-white hover:brightness-110 shadow-lg shadow-[#BC171F]/25",
     secondary:
-      "bg-transparent text-[#F8F5F0] border border-[#F8F5F0]/30 hover:border-[#F8F5F0]/60 hover:bg-[#F8F5F0]/5",
+      "bg-transparent text-white border border-white/80 hover:bg-white/5",
     outline:
-      "bg-transparent text-[#F8F5F0] border-2 border-[#F8F5F0] hover:bg-[#F8F5F0] hover:text-[#0A192F]",
+      "bg-transparent text-white border-2 border-white hover:bg-white hover:text-[#0A192F]",
     ghost:
-      "bg-transparent text-[#a8b2d1] hover:text-[#F8F5F0] hover:bg-[#112240]/50",
+      "bg-transparent text-[#94A3B8] hover:text-white hover:bg-white/5",
   }
 
   const sizeStyles = {
-    sm: "px-4 py-2 text-sm",
-    md: "px-6 py-3 text-base",
-    lg: "px-8 py-4 text-lg",
+    sm: "px-5 py-2.5 text-xs",
+    md: "px-7 py-3.5 text-sm",
+    lg: "px-10 py-5 text-base",
   }
 
   const baseStyles = `
-    relative inline-flex items-center justify-center gap-2
-    font-semibold tracking-wider uppercase
-    rounded-sm transition-colors duration-300
+    relative inline-flex items-center justify-center gap-3
+    font-semibold tracking-[0.15em] uppercase
+    rounded-none transition-all duration-300
     ${variantStyles[variant]}
     ${sizeStyles[size]}
     ${className}
@@ -78,16 +78,17 @@ export function MagneticButton({
       whileTap={{ scale: 0.98 }}
       {...props}
     >
+      <span>{children}</span>
       {icon && (
         <motion.span
           className="inline-flex"
           initial={{ x: 0 }}
-          whileHover={{ x: -2 }}
+          whileHover={{ x: 4 }}
+          transition={{ type: "spring", stiffness: 400, damping: 15 }}
         >
           {icon}
         </motion.span>
       )}
-      <span>{children}</span>
       
       {/* Shine effect */}
       <motion.div
