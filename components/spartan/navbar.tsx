@@ -3,7 +3,6 @@
 import { useState, useEffect } from "react"
 import { motion, AnimatePresence } from "framer-motion"
 import { Menu, X, Phone } from "lucide-react"
-import { SpartanLogo } from "./spartan-logo"
 import { MagneticButton } from "./magnetic-button"
 
 const navLinks = [
@@ -55,11 +54,45 @@ export function Navbar() {
             {/* Logo */}
             <motion.a
               href="/"
-              className="relative z-10"
+              className="relative z-10 flex items-center gap-3"
               whileHover={{ scale: 1.02 }}
               whileTap={{ scale: 0.98 }}
             >
-              <SpartanLogo size="md" />
+              {/* Spartan Helmet Icon */}
+              <div className="relative w-10 h-10 md:w-12 md:h-12">
+                <svg viewBox="0 0 50 50" className="w-full h-full">
+                  {/* Helmet base */}
+                  <ellipse cx="25" cy="42" rx="12" ry="4" fill="#0A192F" />
+                  {/* Helmet body */}
+                  <path
+                    d="M10 25C10 14 16 6 25 6C34 6 40 14 40 25V38C40 40 38 42 36 42H14C12 42 10 40 10 38V25Z"
+                    fill="#112240"
+                    stroke="#F5A623"
+                    strokeWidth="1.5"
+                  />
+                  {/* Helmet crest */}
+                  <path
+                    d="M25 2C25 2 30 6 30 10V18H20V10C20 6 25 2 25 2Z"
+                    fill="#BC171F"
+                  />
+                  {/* Face opening */}
+                  <path
+                    d="M16 22C16 22 18 20 25 20C32 20 34 22 34 22V36C34 36 32 38 25 38C18 38 16 36 16 36V22Z"
+                    fill="#0A192F"
+                  />
+                  {/* Nose guard */}
+                  <rect x="23" y="22" width="4" height="14" fill="#112240" rx="1" />
+                </svg>
+              </div>
+              {/* Logo Text */}
+              <div className="flex flex-col">
+                <span className="text-base md:text-lg font-bold tracking-wide text-[#F8F5F0]">
+                  SPARTAN <span className="text-[#F5A623]">ENERGY</span>
+                </span>
+                <span className="text-[9px] md:text-[10px] tracking-[0.15em] uppercase text-[#8892b0]">
+                  Pioneering Solar Infrastructure
+                </span>
+              </div>
             </motion.a>
 
             {/* Desktop Navigation */}

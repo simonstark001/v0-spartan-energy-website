@@ -11,22 +11,18 @@ const stats = [
   {
     icon: MapPin,
     label: "Serving Maharashtra and Pan-India",
-    color: "#BC171F",
   },
   {
     icon: Home,
     label: "Residential and Commercial Solutions",
-    color: "#BC171F",
   },
   {
     icon: Zap,
     label: "Government Subsidy Assistance",
-    color: "#BC171F",
   },
   {
     icon: Award,
     label: "25-Year Panel Warranty",
-    color: "#BC171F",
   },
 ]
 
@@ -116,41 +112,42 @@ export function HeroSection() {
         <div className="max-w-4xl">
           {/* Pre-headline */}
           <motion.div
-            className="flex items-center gap-3 mb-6"
+            className="mb-8"
             initial={{ opacity: 0, x: -20 }}
             animate={{ opacity: 1, x: 0 }}
             transition={{ delay: 0.3, duration: 0.6 }}
           >
-            <motion.div
-              className="w-12 h-[2px] bg-[#BC171F]"
-              initial={{ width: 0 }}
-              animate={{ width: 48 }}
-              transition={{ delay: 0.5, duration: 0.8 }}
-            />
-            <span className="text-sm tracking-[0.2em] uppercase text-muted-foreground">
+            <span className="inline-block pl-4 border-l-2 border-[#BC171F] text-sm tracking-[0.2em] uppercase text-[#8892b0]">
               Solar Excellence Since 2020
             </span>
           </motion.div>
 
           {/* Main Headline */}
-          <h1 className="text-4xl sm:text-5xl md:text-6xl lg:text-7xl font-bold leading-[1.1] mb-6">
+          <h1 className="text-4xl sm:text-5xl md:text-6xl lg:text-7xl font-bold leading-[1.05] mb-8 text-[#F8F5F0]">
             <AnimatedText delay={0.4} type="words">
               Power Your Home.
             </AnimatedText>
             <br />
-            <span className="text-gradient-red">
+            <span className="relative inline-block">
               <AnimatedText delay={0.8} type="words">
                 Lower Your Electricity Bills.
               </AnimatedText>
+              {/* Subtle red underline accent on "Electricity" */}
+              <motion.span
+                className="absolute -bottom-2 left-0 h-[3px] bg-[#BC171F]"
+                initial={{ width: 0 }}
+                animate={{ width: "40%" }}
+                transition={{ delay: 1.6, duration: 0.8, ease: "easeOut" }}
+              />
             </span>
           </h1>
 
           {/* Subheadline */}
           <motion.p
-            className="text-lg md:text-xl text-muted-foreground max-w-2xl mb-10 leading-relaxed"
+            className="text-lg md:text-xl text-[#a8b2d1] max-w-2xl mb-12 leading-relaxed font-light"
             initial={{ opacity: 0, y: 20 }}
             animate={{ opacity: 1, y: 0 }}
-            transition={{ delay: 1.2, duration: 0.8 }}
+            transition={{ delay: 1.4, duration: 0.8 }}
           >
             Smart solar solutions for Indian homes and businesses, engineered for
             long-term savings and energy independence.
@@ -161,7 +158,7 @@ export function HeroSection() {
             className="flex flex-col sm:flex-row gap-4 mb-16"
             initial={{ opacity: 0, y: 20 }}
             animate={{ opacity: 1, y: 0 }}
-            transition={{ delay: 1.4, duration: 0.8 }}
+            transition={{ delay: 1.6, duration: 0.8 }}
           >
             <MagneticButton
               variant="primary"
@@ -172,18 +169,10 @@ export function HeroSection() {
             </MagneticButton>
 
             <MagneticButton
-              variant="outline"
+              variant="secondary"
               size="lg"
             >
               Commercial Site Survey
-            </MagneticButton>
-
-            <MagneticButton
-              variant="ghost"
-              size="lg"
-              icon={<Play size={18} className="ml-1" />}
-            >
-              Watch Video
             </MagneticButton>
           </motion.div>
 
@@ -205,16 +194,13 @@ export function HeroSection() {
                   className="flex items-center gap-3 shrink-0"
                   initial={{ opacity: 0, y: 20 }}
                   animate={{ opacity: 1, y: 0 }}
-                  transition={{ delay: 1.8 + index * 0.1, duration: 0.5 }}
+                  transition={{ delay: 2.0 + index * 0.1, duration: 0.5 }}
                   whileHover={{ scale: 1.02 }}
                 >
-                  <div
-                    className="w-10 h-10 rounded-full flex items-center justify-center shrink-0"
-                    style={{ backgroundColor: `${stat.color}15` }}
-                  >
-                    <stat.icon size={18} style={{ color: stat.color }} />
+                  <div className="w-9 h-9 rounded-full flex items-center justify-center shrink-0 border border-[#8892b0]/20 bg-[#112240]/50">
+                    <stat.icon size={16} className="text-[#a8b2d1]" />
                   </div>
-                  <span className="text-xs sm:text-sm tracking-wider uppercase text-muted-foreground whitespace-nowrap">
+                  <span className="text-xs sm:text-sm tracking-wider uppercase text-[#8892b0] whitespace-nowrap">
                     {stat.label}
                   </span>
                 </motion.div>
@@ -229,21 +215,21 @@ export function HeroSection() {
         className="absolute bottom-8 left-1/2 -translate-x-1/2 z-10"
         initial={{ opacity: 0 }}
         animate={{ opacity: 1 }}
-        transition={{ delay: 2.2 }}
+        transition={{ delay: 2.4 }}
       >
         <motion.div
           className="flex flex-col items-center gap-2 cursor-pointer"
-          animate={{ y: [0, 8, 0] }}
-          transition={{ duration: 2, repeat: Infinity, ease: "easeInOut" }}
+          animate={{ y: [0, 6, 0] }}
+          transition={{ duration: 2.5, repeat: Infinity, ease: "easeInOut" }}
         >
-          <span className="text-xs tracking-widest uppercase text-muted-foreground">
+          <span className="text-[10px] tracking-[0.2em] uppercase text-[#8892b0]">
             Scroll
           </span>
-          <div className="w-6 h-10 rounded-full border-2 border-muted-foreground/30 flex justify-center pt-2">
+          <div className="w-5 h-9 rounded-full border border-[#8892b0]/30 flex justify-center pt-2">
             <motion.div
-              className="w-1.5 h-1.5 rounded-full bg-[#BC171F]"
+              className="w-1 h-1 rounded-full bg-[#a8b2d1]"
               animate={{ y: [0, 12, 0], opacity: [1, 0.3, 1] }}
-              transition={{ duration: 2, repeat: Infinity, ease: "easeInOut" }}
+              transition={{ duration: 2.5, repeat: Infinity, ease: "easeInOut" }}
             />
           </div>
         </motion.div>

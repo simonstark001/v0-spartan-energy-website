@@ -39,13 +39,13 @@ export function MagneticButton({
 
   const variantStyles = {
     primary:
-      "bg-[#BC171F] text-white hover:bg-[#d41920] shadow-lg shadow-[#BC171F]/25",
+      "bg-[#BC171F] text-white hover:bg-[#a3141a] shadow-lg shadow-[#BC171F]/20",
     secondary:
-      "bg-[#112240] text-foreground hover:bg-[#1d3a5f] border border-[#8892b0]/20",
+      "bg-transparent text-[#F8F5F0] border border-[#F8F5F0]/30 hover:border-[#F8F5F0]/60 hover:bg-[#F8F5F0]/5",
     outline:
-      "bg-transparent text-foreground border-2 border-foreground hover:bg-foreground hover:text-background",
+      "bg-transparent text-[#F8F5F0] border-2 border-[#F8F5F0] hover:bg-[#F8F5F0] hover:text-[#0A192F]",
     ghost:
-      "bg-transparent text-foreground hover:bg-[#112240]",
+      "bg-transparent text-[#a8b2d1] hover:text-[#F8F5F0] hover:bg-[#112240]/50",
   }
 
   const sizeStyles = {
