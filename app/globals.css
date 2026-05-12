@@ -1,0 +1,218 @@
+@import 'tailwindcss';
+@import 'tw-animate-css';
+
+@custom-variant dark (&:is(.dark *));
+
+:root {
+  /* Spartan Energy Brand Colors */
+  --spartan-navy: #0A192F;
+  --spartan-navy-light: #112240;
+  --spartan-navy-dark: #020c1b;
+  --spartan-red: #BC171F;
+  --spartan-red-light: #d41920;
+  --spartan-gold: #F5A623;
+  --spartan-slate: #8892b0;
+  --spartan-light-slate: #a8b2d1;
+  --spartan-lightest-slate: #ccd6f6;
+  --spartan-white: #e6f1ff;
+  
+  --background: #0A192F;
+  --foreground: #e6f1ff;
+  --card: #112240;
+  --card-foreground: #e6f1ff;
+  --popover: #112240;
+  --popover-foreground: #e6f1ff;
+  --primary: #BC171F;
+  --primary-foreground: #ffffff;
+  --secondary: #112240;
+  --secondary-foreground: #e6f1ff;
+  --muted: #112240;
+  --muted-foreground: #8892b0;
+  --accent: #BC171F;
+  --accent-foreground: #ffffff;
+  --destructive: #BC171F;
+  --destructive-foreground: #ffffff;
+  --border: rgba(136, 146, 176, 0.2);
+  --input: rgba(136, 146, 176, 0.2);
+  --ring: #BC171F;
+  --chart-1: #BC171F;
+  --chart-2: #F5A623;
+  --chart-3: #8892b0;
+  --chart-4: #112240;
+  --chart-5: #e6f1ff;
+  --radius: 0.5rem;
+  --sidebar: #0A192F;
+  --sidebar-foreground: #e6f1ff;
+  --sidebar-primary: #BC171F;
+  --sidebar-primary-foreground: #ffffff;
+  --sidebar-accent: #112240;
+  --sidebar-accent-foreground: #e6f1ff;
+  --sidebar-border: rgba(136, 146, 176, 0.2);
+  --sidebar-ring: #BC171F;
+}
+
+.dark {
+  --background: #0A192F;
+  --foreground: #e6f1ff;
+  --card: #112240;
+  --card-foreground: #e6f1ff;
+  --popover: #112240;
+  --popover-foreground: #e6f1ff;
+  --primary: #BC171F;
+  --primary-foreground: #ffffff;
+  --secondary: #112240;
+  --secondary-foreground: #e6f1ff;
+  --muted: #112240;
+  --muted-foreground: #8892b0;
+  --accent: #BC171F;
+  --accent-foreground: #ffffff;
+  --destructive: #BC171F;
+  --destructive-foreground: #ffffff;
+  --border: rgba(136, 146, 176, 0.2);
+  --input: rgba(136, 146, 176, 0.2);
+  --ring: #BC171F;
+  --chart-1: #BC171F;
+  --chart-2: #F5A623;
+  --chart-3: #8892b0;
+  --chart-4: #112240;
+  --chart-5: #e6f1ff;
+  --sidebar: #0A192F;
+  --sidebar-foreground: #e6f1ff;
+  --sidebar-primary: #BC171F;
+  --sidebar-primary-foreground: #ffffff;
+  --sidebar-accent: #112240;
+  --sidebar-accent-foreground: #e6f1ff;
+  --sidebar-border: rgba(136, 146, 176, 0.2);
+  --sidebar-ring: #BC171F;
+}
+
+@theme inline {
+  --font-sans: 'Geist', 'Geist Fallback';
+  --font-mono: 'Geist Mono', 'Geist Mono Fallback';
+  --color-background: var(--background);
+  --color-foreground: var(--foreground);
+  --color-card: var(--card);
+  --color-card-foreground: var(--card-foreground);
+  --color-popover: var(--popover);
+  --color-popover-foreground: var(--popover-foreground);
+  --color-primary: var(--primary);
+  --color-primary-foreground: var(--primary-foreground);
+  --color-secondary: var(--secondary);
+  --color-secondary-foreground: var(--secondary-foreground);
+  --color-muted: var(--muted);
+  --color-muted-foreground: var(--muted-foreground);
+  --color-accent: var(--accent);
+  --color-accent-foreground: var(--accent-foreground);
+  --color-destructive: var(--destructive);
+  --color-destructive-foreground: var(--destructive-foreground);
+  --color-border: var(--border);
+  --color-input: var(--input);
+  --color-ring: var(--ring);
+  --color-chart-1: var(--chart-1);
+  --color-chart-2: var(--chart-2);
+  --color-chart-3: var(--chart-3);
+  --color-chart-4: var(--chart-4);
+  --color-chart-5: var(--chart-5);
+  --radius-sm: calc(var(--radius) - 4px);
+  --radius-md: calc(var(--radius) - 2px);
+  --radius-lg: var(--radius);
+  --radius-xl: calc(var(--radius) + 4px);
+  --color-sidebar: var(--sidebar);
+  --color-sidebar-foreground: var(--sidebar-foreground);
+  --color-sidebar-primary: var(--sidebar-primary);
+  --color-sidebar-primary-foreground: var(--sidebar-primary-foreground);
+  --color-sidebar-accent: var(--sidebar-accent);
+  --color-sidebar-accent-foreground: var(--sidebar-accent-foreground);
+  --color-sidebar-border: var(--sidebar-border);
+  --color-sidebar-ring: var(--sidebar-ring);
+}
+
+@layer base {
+  * {
+    @apply border-border outline-ring/50;
+  }
+  body {
+    @apply bg-background text-foreground;
+  }
+  html {
+    scroll-behavior: smooth;
+  }
+}
+
+/* Premium Typography */
+@layer utilities {
+  .text-gradient {
+    background: linear-gradient(135deg, #e6f1ff 0%, #8892b0 100%);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
+  }
+  
+  .text-gradient-red {
+    background: linear-gradient(135deg, #BC171F 0%, #d41920 50%, #BC171F 100%);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
+  }
+  
+  .glassmorphism {
+    background: rgba(10, 25, 47, 0.8);
+    backdrop-filter: blur(20px);
+    -webkit-backdrop-filter: blur(20px);
+    border: 1px solid rgba(136, 146, 176, 0.1);
+  }
+  
+  .glassmorphism-light {
+    background: rgba(17, 34, 64, 0.6);
+    backdrop-filter: blur(12px);
+    -webkit-backdrop-filter: blur(12px);
+    border: 1px solid rgba(136, 146, 176, 0.15);
+  }
+  
+  /* Spartan heading font style */
+  .font-spartan {
+    font-family: var(--font-sans);
+    letter-spacing: 0.05em;
+    text-transform: uppercase;
+  }
+  
+  /* Magnetic button hover effect */
+  .magnetic-btn {
+    transition: transform 0.3s cubic-bezier(0.34, 1.56, 0.64, 1);
+  }
+  
+  .magnetic-btn:hover {
+    transform: scale(1.02);
+  }
+  
+  /* Smooth underline animation */
+  .animated-underline {
+    position: relative;
+  }
+  
+  .animated-underline::after {
+    content: '';
+    position: absolute;
+    width: 0;
+    height: 2px;
+    bottom: -2px;
+    left: 0;
+    background: #BC171F;
+    transition: width 0.3s ease;
+  }
+  
+  .animated-underline:hover::after {
+    width: 100%;
+  }
+  
+  /* Hide scrollbar for Chrome, Safari and Opera */
+  .scrollbar-hide::-webkit-scrollbar {
+    display: none;
+  }
+  
+  /* Hide scrollbar for IE, Edge and Firefox */
+  .scrollbar-hide {
+    -ms-overflow-style: none;  /* IE and Edge */
+    scrollbar-width: none;  /* Firefox */
+  }
+}
