@@ -1,17 +1,52 @@
 "use client"
 
-import { useRef } from "react"
-import { motion, useScroll, useTransform } from "framer-motion"
-import { MapPin, Home, Zap, Award, ArrowRight } from "lucide-react"
+import { useRef, useEffect, useState } from "react"
+import { motion, useScroll, useTransform, useMotionValue, animate } from "framer-motion"
+import { ArrowRight } from "lucide-react"
 import { MagneticButton } from "./magnetic-button"
 import { ParticleField } from "./particle-field"
 
-const stats = [
-  { icon: MapPin, label: "Maharashtra & Pan-India" },
-  { icon: Home, label: "Residential & Commercial" },
-  { icon: Zap, label: "Government Subsidy" },
-  { icon: Award, label: "25-Year Warranty" },
+const trustItems = [
+  "Maharashtra & Pan-India",
+  "Residential & Commercial",
+  "Government Subsidy",
+  "25-Year Warranty",
+  "Certified Engineers",
+  "Premium Panels",
 ]
+
+// Animated counter component
+function AnimatedCounter({ 
+  end, 
+  duration = 2,
+  prefix = "",
+  suffix = ""
+}: { 
+  end: number
+  duration?: number
+  prefix?: string
+  suffix?: string
+}) {
+  const count = useMotionValue(0)
+  const [displayValue, setDisplayValue] = useState("0")
+
+  useEffect(() => {
+    const controls = animate(count, end, {
+      duration,
+      ease: "easeOut",
+      onUpdate: (latest) => {
+        if (end >= 100) {
+          setDisplayValue(Math.floor(latest).toLocaleString())
+        } else {
+          setDisplayValue(latest.toFixed(1))
+        }
+      }
+    })
+    return controls.stop
+  }, [count, end, duration])
+
+  return <span>{prefix}{displayValue}{suffix}</span>
+}
 
 // Word animation component with blur effect
 function AnimatedWord({ 
@@ -24,11 +59,11 @@ function AnimatedWord({
   return (
     <motion.span
       className="inline-block"
-      initial={{ opacity: 0, y: 40, filter: "blur(10px)" }}
+      initial={{ opacity: 0, y: 50, filter: "blur(12px)" }}
       animate={{ opacity: 1, y: 0, filter: "blur(0px)" }}
       transition={{ 
         delay, 
-        duration: 0.6, 
+        duration: 0.7, 
         ease: [0.25, 0.46, 0.45, 0.94] 
       }}
     >
@@ -53,26 +88,63 @@ export function HeroSection() {
       ref={containerRef}
       className="relative min-h-screen flex items-end overflow-hidden"
     >
-      {/* Background Image */}
+      {/* Background Image with Ken Burns effect */}
       <motion.div 
         className="absolute inset-0 z-0"
         style={{ y: backgroundY }}
       >
-        <div 
+        <motion.div 
           className="absolute inset-0 bg-cover bg-center bg-no-repeat"
           style={{
             backgroundImage: `url('https://images.unsplash.com/photo-1509391366360-2e959784a276?q=80&w=2072&auto=format&fit=crop')`,
+          }}
+          animate={{ 
+            scale: [1, 1.08, 1],
+          }}
+          transition={{ 
+            duration: 20, 
+            repeat: Infinity, 
+            ease: "linear",
+            repeatType: "reverse"
           }}
         />
         {/* Dark overlay */}
         <div className="absolute inset-0 bg-[#0A192F]/85" />
       </motion.div>
 
-      {/* Particle Field - Gold particles */}
+      {/* Aurora/Light sweep effect */}
+      <div className="absolute inset-0 z-[1] overflow-hidden pointer-events-none">
+        <motion.div
+          className="absolute w-[200%] h-[200%] -top-1/2 -left-1/2"
+          style={{
+            background: `linear-gradient(
+              135deg,
+              transparent 0%,
+              transparent 40%,
+              rgba(188, 23, 31, 0.08) 45%,
+              rgba(245, 166, 35, 0.06) 50%,
+              rgba(188, 23, 31, 0.08) 55%,
+              transparent 60%,
+              transparent 100%
+            )`,
+          }}
+          animate={{
+            x: ["-50%", "50%"],
+            y: ["-50%", "50%"],
+          }}
+          transition={{
+            duration: 8,
+            repeat: Infinity,
+            ease: "linear",
+          }}
+        />
+      </div>
+
+      {/* Particle Field - Gold particles drifting upward */}
       <ParticleField />
 
       {/* Animated Gradient Mesh */}
-      <div className="absolute inset-0 z-[1] overflow-hidden">
+      <div className="absolute inset-0 z-[2] overflow-hidden">
         <motion.div
           className="absolute top-0 right-0 w-[1000px] h-[1000px]"
           style={{
@@ -99,9 +171,9 @@ export function HeroSection() {
         />
       </div>
 
-      {/* Grid Pattern Overlay (Linear-style) */}
+      {/* Grid Pattern Overlay */}
       <div
-        className="absolute inset-0 z-[2] opacity-[0.03] pointer-events-none"
+        className="absolute inset-0 z-[3] opacity-[0.03] pointer-events-none"
         style={{
           backgroundImage: `
             linear-gradient(rgba(255,255,255,0.1) 1px, transparent 1px),
@@ -111,9 +183,9 @@ export function HeroSection() {
         }}
       />
 
-      {/* Hero Content - Bottom Left (Rivian style) */}
+      {/* Hero Content */}
       <motion.div
-        className="relative z-10 w-full max-w-7xl mx-auto px-6 lg:px-8 pb-24 pt-40"
+        className="relative z-10 w-full max-w-7xl mx-auto px-6 lg:px-8 pb-32 pt-40"
         style={{ y: textY, opacity }}
       >
         <div className="max-w-5xl">
@@ -135,8 +207,8 @@ export function HeroSection() {
             </span>
           </motion.div>
 
-          {/* Main Headline - Massive, Bebas Neue style */}
-          <h1 className="font-[family-name:var(--font-bebas)] text-[clamp(3.5rem,12vw,7rem)] leading-[0.95] tracking-[0.02em] text-white mb-8">
+          {/* Main Headline */}
+          <h1 className="font-[family-name:var(--font-bebas)] text-[clamp(3.5rem,12vw,7rem)] leading-[0.95] tracking-[0.02em] text-white mb-6">
             <AnimatedWord delay={0.3}>POWER</AnimatedWord>{" "}
             <AnimatedWord delay={0.4}>YOUR</AnimatedWord>{" "}
             <AnimatedWord delay={0.5}>HOME.</AnimatedWord>
@@ -146,7 +218,6 @@ export function HeroSection() {
               <AnimatedWord delay={0.7}>YOUR</AnimatedWord>{" "}
               <span className="relative inline-block">
                 <AnimatedWord delay={0.8}>BILLS.</AnimatedWord>
-                {/* Thin red underline under BILLS */}
                 <motion.span
                   className="absolute -bottom-1 left-0 right-0 h-[2px] bg-[#BC171F]"
                   initial={{ scaleX: 0 }}
@@ -158,9 +229,38 @@ export function HeroSection() {
             </span>
           </h1>
 
+          {/* Live Metrics Bar */}
+          <motion.div
+            className="flex items-center gap-6 mb-6"
+            initial={{ opacity: 0, y: 20 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ delay: 0.9, duration: 0.6 }}
+          >
+            <div className="flex items-baseline gap-1.5">
+              <span className="text-2xl font-semibold text-white">
+                <AnimatedCounter end={500} suffix="+" />
+              </span>
+              <span className="text-xs tracking-wide uppercase text-[#94A3B8]">Installations</span>
+            </div>
+            <div className="w-[1px] h-6 bg-[#94A3B8]/30" />
+            <div className="flex items-baseline gap-1.5">
+              <span className="text-2xl font-semibold text-white">
+                <AnimatedCounter end={2.4} prefix="₹" suffix="Cr" />
+              </span>
+              <span className="text-xs tracking-wide uppercase text-[#94A3B8]">Savings Generated</span>
+            </div>
+            <div className="w-[1px] h-6 bg-[#94A3B8]/30" />
+            <div className="flex items-baseline gap-1.5">
+              <span className="text-2xl font-semibold text-white">
+                <AnimatedCounter end={4.9} suffix="★" />
+              </span>
+              <span className="text-xs tracking-wide uppercase text-[#94A3B8]">Avg Rating</span>
+            </div>
+          </motion.div>
+
           {/* Subheadline */}
           <motion.p
-            className="text-lg md:text-xl text-[#94A3B8] opacity-60 max-w-xl mb-12 leading-relaxed"
+            className="text-lg md:text-xl text-[#94A3B8] opacity-60 max-w-xl mb-10 leading-relaxed"
             initial={{ opacity: 0, y: 20 }}
             animate={{ opacity: 0.6, y: 0 }}
             transition={{ delay: 1.0, duration: 0.8 }}
@@ -171,7 +271,7 @@ export function HeroSection() {
 
           {/* CTA Buttons */}
           <motion.div
-            className="flex flex-col sm:flex-row gap-4 mb-16"
+            className="flex flex-col sm:flex-row gap-4"
             initial={{ opacity: 0, y: 30 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ delay: 1.2, duration: 0.8 }}
@@ -191,27 +291,36 @@ export function HeroSection() {
               Commercial Survey
             </MagneticButton>
           </motion.div>
+        </div>
+      </motion.div>
 
-          {/* Trust Indicators */}
+      {/* Marquee Trust Bar */}
+      <motion.div
+        className="absolute bottom-0 left-0 right-0 z-10 py-4 bg-[#0A192F]/80 backdrop-blur-sm border-t border-white/5"
+        initial={{ opacity: 0, y: 20 }}
+        animate={{ opacity: 1, y: 0 }}
+        transition={{ delay: 1.6, duration: 0.8 }}
+      >
+        <div className="relative overflow-hidden">
           <motion.div
-            className="flex flex-wrap gap-x-8 gap-y-4"
-            initial={{ opacity: 0 }}
-            animate={{ opacity: 1 }}
-            transition={{ delay: 1.4, duration: 0.8 }}
+            className="flex gap-12 whitespace-nowrap"
+            animate={{ x: [0, -1200] }}
+            transition={{
+              x: {
+                duration: 30,
+                repeat: Infinity,
+                ease: "linear",
+              },
+            }}
           >
-            {stats.map((stat, index) => (
-              <motion.div
-                key={stat.label}
-                className="flex items-center gap-3"
-                initial={{ opacity: 0, y: 15 }}
-                animate={{ opacity: 1, y: 0 }}
-                transition={{ delay: 1.5 + index * 0.1, duration: 0.5 }}
+            {[...trustItems, ...trustItems, ...trustItems, ...trustItems].map((item, i) => (
+              <span
+                key={i}
+                className="text-xs tracking-[0.2em] uppercase text-[#94A3B8]/60 flex items-center gap-3"
               >
-                <stat.icon size={16} className="text-[#F5A623]" strokeWidth={1.5} />
-                <span className="text-xs tracking-[0.1em] uppercase text-[#94A3B8] opacity-70">
-                  {stat.label}
-                </span>
-              </motion.div>
+                <span className="w-1 h-1 rounded-full bg-[#F5A623]/60" />
+                {item}
+              </span>
             ))}
           </motion.div>
         </div>
@@ -219,7 +328,7 @@ export function HeroSection() {
 
       {/* Scroll Indicator */}
       <motion.div
-        className="absolute bottom-8 right-8 z-10 hidden md:block"
+        className="absolute bottom-20 right-8 z-10 hidden md:block"
         initial={{ opacity: 0 }}
         animate={{ opacity: 1 }}
         transition={{ delay: 2.0 }}
@@ -237,7 +346,7 @@ export function HeroSection() {
       </motion.div>
 
       {/* Bottom gradient fade */}
-      <div className="absolute bottom-0 left-0 right-0 h-40 bg-gradient-to-t from-[#0A192F] to-transparent z-[3] pointer-events-none" />
+      <div className="absolute bottom-12 left-0 right-0 h-32 bg-gradient-to-t from-[#0A192F] to-transparent z-[3] pointer-events-none" />
     </section>
   )
 }
